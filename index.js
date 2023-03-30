@@ -10,7 +10,7 @@ dotenv.config();
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', true);
 mongoose.connect(
-    "mongodb+srv://yogeshthakare402:Yogesh402@recoipeapp.1itn9wq.mongodb.net/RecipeApp?retryWrites=true&w=majority",
+    "mongodb+srv://yogeshthakare402:Yogesh402@recoipeapp.1itn9wq.mongodb.net/?retryWrites=true&w=majority",
 { useNewUrlParser: true, useUnifiedTopology: true },
 () => {
   console.log("successfully connected to db");
