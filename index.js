@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const connect = require("./connection/connect");
+// const connect = require("./connection/connect");
 const RecipeRouter = require('./routes/recipeRoute');
 
 const dotenv = require("dotenv");
