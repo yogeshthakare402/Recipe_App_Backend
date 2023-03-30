@@ -9,16 +9,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', true);
-mongoose.connect(
-    "mongodb+srv://yogeshthakare402:Yogesh402@recoipeapp.1itn9wq.mongodb.net/?retryWrites=true&w=majority",
-{ useNewUrlParser: true, useUnifiedTopology: true },
-() => {
-  console.log("successfully connected to db");
-},
-(err) => {
-  console.log(err);
-}
-);
+let mongouri = "mongodb+srv://yogeshthakare402:Yogesh402@recoipeapp.1itn9wq.mongodb.net/?retryWrites=true&w=majority"
+mongoose.connect(mongouri,{ useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => {console.log("successfully connected to db");})
+.catch((err) => {console.log(err);})
 
 app.use(cors());
 app.use(express.json());
