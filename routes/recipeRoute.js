@@ -24,15 +24,8 @@ router.get('/recipeapi/:id', async(req, res) => {
     try {
         console.log('in get with ID')
         // console.log(req)
-        let _id = req.params.id.slice(1)
-        console.log(_id)
-        if( mongoose.Types.ObjectId.isValid(_id) ){
-            console.log(true);
-        }else {
-            console.log("ID is not valid")
-        }
 
-        let recipe = await Recipe.find({_id:`${_id}`})
+        let recipe = await Recipe.find({_id:req.params.id})
         
         if (recipe) {
             res.status(200).json({
@@ -119,15 +112,37 @@ router.patch('/recipeapi/:id', async(req, res) => {
         console.log('in Update favourite / Rating')
         console.log(req.params.id)
         console.log(req.body)
-        let _id = req.params.id.slice(1)
-        console.log(_id)
-        if( mongoose.Types.ObjectId.isValid(_id) ){
-            console.log(true);
-        }else {
-            console.log("ID is not valid")
+
+        let recipe = await Recipe.updateOne({_id:req.params.id},{$set:req.body})
+        
+        if (recipe) {
+            res.status(200).json({
+                status: "Success",
+                recipe: recipe
+            })
+        } else {
+            res.status(404).json({
+                status: "Failed",
+                message: "Invalid Data"
+            })
         }
 
-        let recipe = await Recipe.updateOne({_id:`${_id}`},{$set:req.body})
+    } catch (error) {
+        res.status(500).json({
+            status: "Failed",
+            message: error
+        })
+    }
+})
+
+router.delete('/recipeapi/:id', async(req, res) => {
+    try {
+        
+        console.log('in Delete Recipe')
+        console.log(req.params.id)
+        console.log(req.body)
+    
+        let recipe = await Recipe.findByIdAndDelete({_id:req.params.id})
         
         if (recipe) {
             res.status(200).json({
